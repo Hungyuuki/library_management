@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "Category", uniqueConstraints = {@UniqueConstraint(columnNames = {"categoryname"})})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +20,5 @@ public class Category {
     @NotBlank
     @Size(min = 3, max = 30)
     private String category_name;
+    @ManyToOne
 }

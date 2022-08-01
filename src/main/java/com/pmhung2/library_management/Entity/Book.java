@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "Book", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "book_name"
-        })
-})
+@Table(name = "Book")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,13 +25,7 @@ public class Book {
     @NotBlank
     @Size(min = 3, max = 30)
     private String book_name;
-    @NotBlank
-    @Size(min = 3, max = 30)
-    private String address;
-    @NotBlank
-    @Size(min = 3, max = 30)
-    private String email;
-    @NotBlank
-    @Size(min = 3, max = 30)
-    private String image;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "Book_Category", joinColumns = @JoinColumn(name = "Book_id"), inverseJoinColumns = @JoinColumn(name = "Category_id"))
+    Set<Category> categories = new HashSet<>();
 }

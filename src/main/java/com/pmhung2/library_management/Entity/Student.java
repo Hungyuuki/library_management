@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
+@Entity
+@Table(name = "Students", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,8 +25,9 @@ public class Student {
     private String address;
     @NotBlank
     @Size(min = 3, max = 30)
+    @Email
     private String email;
     @NotBlank
-    @Size(min = 3, max = 30)
+    @Lob
     private String image;
 }
