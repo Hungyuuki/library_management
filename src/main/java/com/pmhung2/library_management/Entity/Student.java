@@ -1,8 +1,6 @@
-package com.pmhung2.library_management.Model;
+package com.pmhung2.library_management.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -10,13 +8,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 @Entity
 @Table(name = "Students", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int student_no;
+    private Long id;
     @NotBlank
     @Size(min = 3, max = 30)
     private String studentName;
